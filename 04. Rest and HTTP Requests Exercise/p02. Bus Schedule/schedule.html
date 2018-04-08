@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bus Schedule</title>
+    <style>
+        #schedule {
+            text-align: center;
+            width: 400px;
+        }
+
+        input {
+            width: 120px;
+        }
+
+        #info {
+            background-color: aquamarine;
+            border: 1px solid black;
+            margin: 0.25em;
+        }
+
+        .info {
+            font-size: 1.5em;
+            padding: 0.25em;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<div id="schedule">
+    <div id="info"><span class="info">Not Connected</span></div>
+    <div id="controls">
+        <input id="depart" value="Depart" type="button" onclick="result.depart()">
+        <input id="arrive" value="Arrive" type="button" onclick="result.arrive()" disabled="true">
+    </div>
+</div>
+<script>
+    function solve() {
+        const URL = `https://judgetests.firebaseio.com/schedule`;
+        let departBtn = $('#depart');
+        let arriveBtn = $('#arrive').attr('disabled', true);
+        let infoSpan = $('.info');
+
+        let currentId = 'depot';
+        let nextId = 'depot';
+
+        function depart() {
+            $.ajax({
+                method: 'GET',
+                url: URL + `/${nextId}.json`,
+                success: handleSuccess,
+                error: handleError
+            })
+
+            function handleSuccess(res) {
+                // alert(JSON.stringify(res));
+                currentId = res.name;
+                nextId = res.next;
+
+                infoSpan.text(`Next stop ${currentId}`);
+                departBtn.attr('disabled', true);
+                arriveBtn.attr('disabled', false);
+            }
+
+            function handleError(err) {
+                infoSpan.text(`Error`);
+                departBtn.attr('disabled', true);
+                arriveBtn.attr('disabled', true);
+            }
+        }
+
+        function arrive() {
+            infoSpan.text(`Arriving at ${currentId}`);
+            departBtn.attr('disabled', false);
+            arriveBtn.attr('disabled', true);
+        }
+
+
+        return {
+            depart,
+            arrive
+        };
+    }
+
+    let result = solve();
+</script>
+</body>
+</html>

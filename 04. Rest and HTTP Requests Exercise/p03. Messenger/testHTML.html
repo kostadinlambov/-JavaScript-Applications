@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Messenger</title>
+    <style>
+        label {
+            display: inline-block;
+            width: 5em;
+        }
+
+        #author, #content {
+            width: 30em;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<div id="main">
+    <textarea id="messages" cols="80" rows="12" disabled="true"><yxyx</textarea>
+    <div id="controls">
+        <label for="author">Name: </label>
+        <input id="author" type="text"><br>
+        <label for="content">Message: </label>
+        <input id="content" type="text">
+        <input id="submit" type="button" value="Send">
+        <input id="refresh" type="button" value="Refresh">
+    </div>
+</div>
+<!--<script src="solution.js"></script>-->
+<script>
+
+
+    function attachEvents() {
+        const url = "https://messenger-745d5.firebaseio.com/messenger/.json";
+
+        function sendMsg() {
+            let authorName = $("#author").val();
+            let msgContent = $("#content").val();
+            if (authorName && msgContent) {
+                let data = {
+                    author: authorName,
+                    content: msgContent,
+                    timestamp: Date.now()
+                }
+                $.ajax({
+                    method: "POST",
+                    url: url,
+                    data: JSON.stringify(data)
+                }).then((res) => {
+                    refresh();
+                }).catch();
+            }
+        }
+
+        function refresh() {
+            $.ajax({
+                method: "GET",
+                url: url
+            }).then((res) => {
+                let orderedResults = Array.from(Object.keys(res).map(k => res[k])).sort((a, b) => {
+                    return a.timestamp - b.timestamp;
+                });
+                let result = orderedResults.map(i => `${i.author}: ${i.content}`).join("\n");
+                $("#messages").text(result);
+            })
+        }
+
+        $("#submit").click(sendMsg);
+        $("#refresh").click(refresh);
+        refresh();
+    }
+
+    attachEvents();
+</script>
+</body>
+</html>
