@@ -1,0 +1,21 @@
+<div class="container centered">
+    {{> header}}
+    <div class="box">
+        <h1>Register</h1>
+        <div class="content">
+            <form id="register-form">
+                <label for="newUsername">Username</label>
+                <input name="username" id="newUsername" type="text">
+                <label for="newPassword">Password</label>
+                <input name="password" id="newPassword" type="password">
+                <label for="newPassRep">Repeat Password</label>
+                <input name="repeatPass" id="newPassRep" type="password">
+                <input type="submit" value="Register">
+            </form>
+            <div class="centered">
+                <a href="#">Sign In</a>
+            </div>
+        </div>
+    </div>
+    {{> footer}}
+</div>
