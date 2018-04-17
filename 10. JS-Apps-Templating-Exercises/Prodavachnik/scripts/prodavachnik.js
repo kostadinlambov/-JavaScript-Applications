@@ -2,8 +2,6 @@ const BASE_URL = 'https://baas.kinvey.com/';
 const APP_KEY = 'kid_r1M0a1n5f';
 const APP_SECRET = '5f3c0978f37f47f0a7a0b4c6179ca6e6';
 const AUTH_HEADERS = {'Authorization': "Basic " + btoa(APP_KEY + ":" + APP_SECRET)};
-// let username = "pesho"
-// let password = "p"
 
 function loginUser() {
     let username = $('#formLogin input[name=username]').val();
