@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prodavachnik</title>
+    <script src="scripts/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+    <script src="store/headerStore.js"></script>
+    <script src="scripts/displayElements.js"></script>
+    <script src="scripts/prodavachnik.js"></script>
+    <script src="scripts/attachEvents.js"></script>
+    <script src="scripts/startApp.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/prodavachnik.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
+</head>
+
+<body>
+<div id="app"></div>
+<main>
+    <section id="loadingBox" class="loadingBox">Loading ...</section>
+    <section id="infoBox" class="infoBox">Info</section>
+    <section id="errorBox" class="errorBox">Error</section>
+    <div id="content"></div>
+    <script>
+        startApp();
+    </script>
+</main>
+</body>
+</html>
