@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js
+"></script>
+</head>
+
+<body>
+<script>
+    (async function () {
+        let partial = await $.get('partial.hbs');
+        Handlebars.registerPartial('partial', partial);
+
+        let source = await $.get('template.hbs');
+        let template = Handlebars.compile(source);
+        let context = {
+            title: 'Friends',
+            contacts: [
+                {name: 'Pesho',email: 'i.ivanov@gmail.com', phone: '1',  greeting: 'Hi everyone#####'},
+                {name: '<i>Maria Petrova</i>', email: 'mar4eto@abv.bg', phone: '2'},
+                {name: 'Jordan Kirov', email: 'jordk@gmail.com', phone: '3', greeting: 'Hi everyone#####'}
+            ],
+
+        };
+
+        console.log(template);
+
+        let html = template(context);
+        console.log(html);
+
+        $('body').append(html)
+    }())
+</script>
+</body>
+</html>

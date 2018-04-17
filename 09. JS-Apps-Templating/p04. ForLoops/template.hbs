@@ -1,0 +1,16 @@
+<article>
+    <h2>
+        {{title}}
+    </h2>
+    {{#each contacts}}
+        <div class="title">
+            {{name}}
+            <button>&#8505;</button>
+        </div>
+        <div class="info">
+            <p>&phone; {{phone}}</p>
+            <p>&#9993; {{email}}</p>
+        </div>
+    {{/each}}
+</article>
+
