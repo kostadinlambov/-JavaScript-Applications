@@ -1,0 +1,23 @@
+{{#if isAuth}}
+
+<header class="clearfix" id="profile">
+    <div id="cashier">
+        <span>Cashier: </span>
+        <a href="#homeScreen">{{username}}</a>
+    </div>
+    <nav id="nav">
+        <ul>
+            <li>
+                <a href="#/editReceipt">Editor</a>
+            </li>
+            <li>
+                <a href="#/receiptsList">Overview</a>
+            </li>
+            <li>
+                <a href="#/logout" class="logout">Logout</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+{{/if}}
